@@ -12,6 +12,8 @@ public class PetlaZTablica {
 
         int[] tablica = new int[n];
 
+        System.out.println("Długość tablicy to: " + tablica.length);
+
 //        int[][] tablica2Wymiary = new int[n][n];
 
         for (int i = 0; i < tablica.length; i++) {
@@ -21,6 +23,7 @@ public class PetlaZTablica {
 
         for (int j = 0; j < tablica.length; j++) {
             for (int k = 0; k <= tablica[j]; k++) {
+                tablica[j] = j;
                 System.out.print(k + " ");
             }
             System.out.println();
