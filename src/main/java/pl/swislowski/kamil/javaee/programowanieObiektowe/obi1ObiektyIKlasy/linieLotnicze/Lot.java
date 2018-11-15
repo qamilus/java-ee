@@ -5,6 +5,7 @@ import java.util.Calendar;
 public class Lot {
     private LiniaLotnicza liniaLotnicza;
 
+    private FlightClassEnum klasaLotu;
     private String dlugoscLotu;
     private String lotniskoOdlotu;
     private String lotniskoPrzylotu;
@@ -12,6 +13,16 @@ public class Lot {
     private Calendar dataOdlotu;
 
     public Lot(String dlugoscLotu, String lotniskoOdlotu, String lotniskoPrzylotu, LiniaLotnicza liniaLotnicza, String modelSamolotu, Calendar dataOdlotu) {
+        this.dlugoscLotu = dlugoscLotu;
+        this.lotniskoOdlotu = lotniskoOdlotu;
+        this.lotniskoPrzylotu = lotniskoPrzylotu;
+        this.liniaLotnicza = liniaLotnicza;
+        this.modelSamolotu = modelSamolotu;
+        this.dataOdlotu = dataOdlotu;
+    }
+
+    public Lot(FlightClassEnum klasaLotu, String dlugoscLotu, String lotniskoOdlotu, String lotniskoPrzylotu, LiniaLotnicza liniaLotnicza, String modelSamolotu, Calendar dataOdlotu) {
+        this.klasaLotu = klasaLotu;
         this.dlugoscLotu = dlugoscLotu;
         this.lotniskoOdlotu = lotniskoOdlotu;
         this.lotniskoPrzylotu = lotniskoPrzylotu;
@@ -32,15 +43,20 @@ public class Lot {
         return dataOdlotu;
     }
 
+    public FlightClassEnum getKlasaLotu() {
+        return klasaLotu;
+    }
+
     @Override
     public String toString() {
         return "Lot{" +
-                "dlugoscLotu='" + dlugoscLotu + '\'' +
+                "liniaLotnicza=" + liniaLotnicza +
+                ", klasaLotu=" + klasaLotu.getUserFriendlyName() +
+                ", dlugoscLotu='" + dlugoscLotu + '\'' +
                 ", lotniskoOdlotu='" + lotniskoOdlotu + '\'' +
                 ", lotniskoPrzylotu='" + lotniskoPrzylotu + '\'' +
-                ", liniaLotnicza='" + liniaLotnicza + '\'' +
                 ", modelSamolotu='" + modelSamolotu + '\'' +
-                ", dataOdlotu='" + dataOdlotu.getTime() + '\'' +
+                ", dataOdlotu=" + dataOdlotu.getTime() +
                 '}';
     }
 }

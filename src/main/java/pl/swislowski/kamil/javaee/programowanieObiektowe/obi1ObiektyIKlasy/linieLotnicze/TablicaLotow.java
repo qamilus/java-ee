@@ -10,13 +10,23 @@ public class TablicaLotow {
     public TablicaLotow() {
         LiniaLotnicza plLot = new LiniaLotnicza("PlLot", "0987654h");
 
-        Lot warszawaLondynLot = new Lot("2,5h", "Warszawa",
+        Lot warszawaLondynLot = new Lot(FlightClassEnum.BUSINESS, "2,5h", "Warszawa",
                 "Londyn", plLot, "Being 787",
                 ustawDateWylotu(2018, Calendar.APRIL, 12, 11,55) );
 
         Lot warszawaBerlinLot = new Lot("1,5h", "Warszawa",
                 "Berlin", new LiniaLotnicza("Lufthansa", "1234567h"), "AirBus A-360",
                 ustawDateWylotu(2018, Calendar.AUGUST, 14, 22,35));
+
+        Lot warszawaParyz = new LotBuilder()
+                .setDataOdlotu(Calendar.getInstance())
+                .setDlugoscLotu("3")
+                .setKlasaLotu(FlightClassEnum.E_1)
+                .setLiniaLotnicza(new LiniaLotnicza("Wizzair", "23123123g"))
+                .setLotniskoOdlotu("Warszawa")
+                .setLotniskoPrzylotu("Paryż")
+                .setModelSamolotu("Airbus 321")
+                .createLot();
 
         this.lotList.add(warszawaLondynLot);
         this.lotList.add(warszawaBerlinLot);
