@@ -1,18 +1,24 @@
 package pl.swislowski.kamil.javaee.programowanieObiektowe.przychodnia.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Lekarz {
     private String imie;
     private String nazwisko;
     private String pesel;
 
-    private Specjalnosc specjalnosc;
-    //TODO: Elastyczna lista specjalizacji.
+    private Specjalnosc glownaSpecjalnosc;
+    // Elastyczna lista specjalizacji.
+    private List<Specjalnosc> specjalnosci = new ArrayList<>();
 
-    public Lekarz(String imie, String nazwisko, String pesel, Specjalnosc specjalnosc) {
+    public Lekarz(String imie, String nazwisko, String pesel, Specjalnosc glownaSpecjalnosc) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.pesel = pesel;
-        this.specjalnosc = specjalnosc;
+        this.glownaSpecjalnosc = glownaSpecjalnosc;
+
+        this.specjalnosci.add(glownaSpecjalnosc);
     }
 
     public String getImie() {
@@ -39,12 +45,20 @@ public class Lekarz {
         this.pesel = pesel;
     }
 
-    public Specjalnosc getSpecjalnosc() {
-        return specjalnosc;
+    public Specjalnosc getGlownaSpecjalnosc() {
+        return glownaSpecjalnosc;
     }
 
-    public void setSpecjalnosc(Specjalnosc specjalnosc) {
-        this.specjalnosc = specjalnosc;
+    public void setGlownaSpecjalnosc(Specjalnosc glownaSpecjalnosc) {
+        this.glownaSpecjalnosc = glownaSpecjalnosc;
+    }
+
+    public void dodajSpecjalnosc(Specjalnosc specjalnosc) {
+        this.specjalnosci.add(specjalnosc);
+    }
+
+    public List<Specjalnosc> getSpecjalnosci() {
+        return specjalnosci;
     }
 
     @Override
@@ -53,7 +67,8 @@ public class Lekarz {
                 "imie='" + imie + '\'' +
                 ", nazwisko='" + nazwisko + '\'' +
                 ", pesel='" + pesel + '\'' +
-                ", specjalnosc=" + specjalnosc +
+                ", glownaSpecjalnosc=" + glownaSpecjalnosc +
+                ", specjalnosci=" + specjalnosci +
                 '}';
     }
 }

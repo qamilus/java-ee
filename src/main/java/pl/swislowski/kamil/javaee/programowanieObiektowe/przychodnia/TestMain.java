@@ -51,6 +51,7 @@ public class TestMain {
         administracja.dodajTerminDoGrafiku(naZaDwaDniTermin);
         administracja.przegladajGrafik();
 
+        obslugaPacjenta.rezerwujTermin(naZaTydzienTermin, stefanRadomskiPacjent);
         obslugaPacjenta.rezerwujTermin(naDzisTermin, stefanRadomskiPacjent);
         administracja.przegladajGrafik();
 
@@ -76,5 +77,12 @@ public class TestMain {
         List<Lekarz> wyszukaniLekarze2 = obslugaPacjenta.wyszukajLekarza(null, null, "01234567891", null);
         System.out.println(wyszukaniLekarze2);
 
+        administracja.oznaczTerminJakoWykonany(naDzisTermin);
+        administracja.historiaTerminow(przychodnia.getGrafik());
+
+        administracja.oznaczTerminJakoWykonany(naZaTydzienTermin);
+        administracja.historiaTerminow(przychodnia.getGrafik());
+
+        obslugaPacjenta.wyszukajSpecjalnosc(Specjalnosc.INTERNISTA);
     }
 }

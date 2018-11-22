@@ -10,9 +10,7 @@ public class PrzychodniaAdministracja {
 
     private Przychodnia przychodnia;
 
-//    private Grafik grafik = new Grafik();
     private Map<String, Pacjent> spisPacjentow = new HashMap<>();
-//    private Map<String, Lekarz> spisLekarzy = new HashMap<>();
 
     public PrzychodniaAdministracja(Przychodnia przychodnia) {
         this.przychodnia = przychodnia;
@@ -31,6 +29,7 @@ public class PrzychodniaAdministracja {
     }
 
     public void usunTerminZGrafiku(Termin termin) {
+        // Termin można zarezerwować dla pacjenta lub usunąć gdy nie ma rezerwacji.
         if (termin.getPacjent() == null) {
             this.przychodnia.getGrafik().getTerminy().remove(termin);
         } else {
@@ -40,12 +39,32 @@ public class PrzychodniaAdministracja {
     }
 
     public void historiaTerminow(Grafik grafik) {
+        System.out.println();
+        System.out.println("HISTORIA TERMINÓW");
+
         List<Termin> terminy = grafik.getTerminy();
+
+        boolean jestHistoriaTerminow = false;
         for (Termin termin : terminy) {
             if (termin.getStatusTerminu() == StatusTerminu.WYKONANY) {
                 System.out.println("Termin wykonany: " + termin);
-                //TODO: Rozważycć zwrócenie nowej listy zawierającej tylko wykonane statusy.
+                jestHistoriaTerminow = true;
+                // Rozważycć zwrócenie nowej listy zawierającej tylko wykonane statusy.
             }
+        }
+
+        if (!jestHistoriaTerminow) {
+            System.out.println("Brak historii terminów.");
+        }
+    }
+
+    public void oznaczTerminJakoWykonany(Termin termin) {
+        if (!(termin.getStatusTerminu() == StatusTerminu.WOLNY)) {
+//            if (termin.getStatusTerminu() == StatusTerminu.ZAREZERWOWANY)
+            termin.setStatusTerminu(StatusTerminu.WYKONANY);
+        } else {
+            System.out.printf("Nie można oznaczyć terminu %s jako %s, ponieważ jest on %s.%n",
+                    termin ,StatusTerminu.WYKONANY, termin.getStatusTerminu());
         }
     }
 
