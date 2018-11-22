@@ -21,7 +21,7 @@ public class Skrzydlo {
         this.klamka = klamka;
     }
 
-    // Metody dostępowe. Wprzypadku pól typu boolean zamiast "get" używamy "is".
+    // Metody dostępowe. W przypadku pól typu boolean zamiast "get" używamy "is".
     public int getDlugosc() {
         return dlugosc;
     }
