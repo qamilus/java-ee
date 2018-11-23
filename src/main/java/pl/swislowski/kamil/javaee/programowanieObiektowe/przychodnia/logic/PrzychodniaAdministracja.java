@@ -17,24 +17,28 @@ public class PrzychodniaAdministracja {
     }
 
     public void rejestrujPacjenta(Pacjent pacjent) {
+        System.out.println("\n## Rejestruję pacjenta " + pacjent);
         this.spisPacjentow.put(pacjent.getPesel(), pacjent);
     }
 
     public void rejestrujLekarza(Lekarz lekarz) {
+        System.out.println("\n## Rejestruję lekarza " + lekarz);
         this.przychodnia.getSpisLekarzy().put(lekarz.getPesel(), lekarz);
     }
 
     public void dodajTerminDoGrafiku(Termin nowyTermin) {
+        System.out.println("\n## Dodaję termin do grafiku " + nowyTermin);
         this.przychodnia.getGrafik().getTerminy().add(nowyTermin);
     }
 
     public void usunTerminZGrafiku(Termin termin) {
+        System.out.println("\n## Usuwam termin z grafiku " + termin);
         // Termin można zarezerwować dla pacjenta lub usunąć gdy nie ma rezerwacji.
         if (termin.getPacjent() == null) {
             this.przychodnia.getGrafik().getTerminy().remove(termin);
         } else {
-            System.out.println("Usunięcie terminu " + termin +
-                    " z grafiku nie jest możliwe, ponieważ jest przypisany do niego pacjent " + termin.getPacjent() + ".");
+            System.out.println("Usunięcie terminu z grafiku nie jest możliwe, ponieważ jest przypisany do niego pacjent "
+                    + termin + " " + termin.getPacjent());
         }
     }
 
@@ -49,7 +53,7 @@ public class PrzychodniaAdministracja {
             if (termin.getStatusTerminu() == StatusTerminu.WYKONANY) {
                 System.out.println("Termin wykonany: " + termin);
                 jestHistoriaTerminow = true;
-                // Rozważycć zwrócenie nowej listy zawierającej tylko wykonane statusy.
+                // Rozważyć zwrócenie nowej listy zawierającej tylko wykonane statusy.
             }
         }
 
@@ -59,6 +63,7 @@ public class PrzychodniaAdministracja {
     }
 
     public void oznaczTerminJakoWykonany(Termin termin) {
+        System.out.println("\n## Oznaczam termin jako wykonany " + termin);
         if (!(termin.getStatusTerminu() == StatusTerminu.WOLNY)) {
 //            if (termin.getStatusTerminu() == StatusTerminu.ZAREZERWOWANY)
             termin.setStatusTerminu(StatusTerminu.WYKONANY);

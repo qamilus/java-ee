@@ -16,12 +16,15 @@ public class PrzychodniaPacjent {
     }
 
     public Termin wyszukajTermin(LocalDateTime wyszukiwanaDataGodzina) {
+        System.out.println("\n## Wyszukuję termin " + wyszukiwanaDataGodzina);
         for (Termin termin : this.przychodnia.getGrafik().getTerminy()) {
             LocalDateTime dataGodzina = termin.getDataGodzina();
             if (wyszukiwanaDataGodzina.isEqual(dataGodzina)) {
+                System.out.println("Wyszukany termin " + termin);
                 return termin;
             }
         }
+        System.out.println("Wyszukiwany termin nie został odnaleziony. ");
         return null;
     }
 
@@ -37,6 +40,11 @@ public class PrzychodniaPacjent {
      */
     public List<Lekarz> wyszukajLekarza(String szukaneImie, String szukaneNazwisko,
                                         String szukanyPesel, Specjalnosc szukanaSpecjalnosc) {
+        System.out.println("\n## Wyszukuję lekarza ");
+        System.out.print(" szukane imię: " + szukaneImie);
+        System.out.print(" szukane nazwisko: " + szukaneNazwisko);
+        System.out.print(" szukany pesel: " + szukanyPesel);
+        System.out.print(" szukana specjalność: " + szukanaSpecjalnosc);
         List<Lekarz> wyszukaniLekarze = new ArrayList<>();
 
         for (Map.Entry<String, Lekarz> mapEntry : this.przychodnia.getSpisLekarzy().entrySet()) {
@@ -62,12 +70,14 @@ public class PrzychodniaPacjent {
                 }
             }
         }
+
+        System.out.println("Wyszukani lekarze " + wyszukaniLekarze);
         return wyszukaniLekarze;
     }
 
     public List<Termin> wyszukajSpecjalnosc(Specjalnosc szukanaSpecjalnosc) {
         // Po wyborze specjalności (i opcjonalnie daty) dostaje listę 5 najbliższych wolnych terminów (nawet jeśli są za rok).
-        System.out.println();
+        System.out.println("\n## Wyszukuję specjalność " + szukanaSpecjalnosc);
         List<Termin> wyszukaneTerminy = new ArrayList<>();
         int licznik = 0;
         int maxLiczbaTerminow = 5;
@@ -88,16 +98,22 @@ public class PrzychodniaPacjent {
             }
         }
 
-        System.out.printf("Dostępne terminy dla wybranej specjalności %s -> %s",szukanaSpecjalnosc,wyszukaneTerminy);
+        System.out.printf("Dostępne terminy dla wybranej specjalności %s -> %s", szukanaSpecjalnosc, wyszukaneTerminy);
         return wyszukaneTerminy;
-}
+    }
 
     public void rezerwujTermin(Termin termin, Pacjent pacjent) {
-        termin.setPacjent(pacjent);
-        termin.setStatusTerminu(StatusTerminu.ZAREZERWOWANY);
+        System.out.println("\n## Rezerwuję termin dla pacjenta " + termin + " " + pacjent);
+        if (termin.getStatusTerminu() == StatusTerminu.WOLNY) {
+            termin.setPacjent(pacjent);
+            termin.setStatusTerminu(StatusTerminu.ZAREZERWOWANY);
+        } else {
+            System.out.println("Nie udało się zarezerwować terminu.");
+        }
     }
 
     public void przeniesTermin(Termin staryTermin, LocalDateTime nowaDataGodzina) {
+        System.out.println("\n## Przenoszę termin dla pacjenta z " + staryTermin + " na " + nowaDataGodzina);
         Termin nowyTermin = wyszukajTermin(nowaDataGodzina);
         if (nowyTermin != null) {
             rezerwujTermin(nowyTermin, staryTermin.getPacjent());
@@ -112,8 +128,13 @@ public class PrzychodniaPacjent {
     }
 
     public void odwolajTermin(Termin termin) {
-        termin.setPacjent(null);
-        termin.setStatusTerminu(StatusTerminu.WOLNY);
+        System.out.println("\n## Odwołuję termin " + termin);
+        if (termin.getStatusTerminu() == StatusTerminu.ZAREZERWOWANY) {
+            termin.setPacjent(null);
+            termin.setStatusTerminu(StatusTerminu.WOLNY);
+        } else {
+            System.out.println("Nie udało się odwołać terminu.");
+        }
     }
 
 }
