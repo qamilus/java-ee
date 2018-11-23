@@ -2,6 +2,8 @@ package pl.swislowski.kamil.javaee.programowanieObiektowe.przychodnia.logic;
 
 import pl.swislowski.kamil.javaee.programowanieObiektowe.przychodnia.data.*;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +71,7 @@ public class PrzychodniaAdministracja {
             termin.setStatusTerminu(StatusTerminu.WYKONANY);
         } else {
             System.out.printf("Nie można oznaczyć terminu %s jako %s, ponieważ jest on %s.%n",
-                    termin ,StatusTerminu.WYKONANY, termin.getStatusTerminu());
+                    termin, StatusTerminu.WYKONANY, termin.getStatusTerminu());
         }
     }
 
@@ -77,24 +79,47 @@ public class PrzychodniaAdministracja {
         System.out.println();
         System.out.println("GRAFIK");
         List<Termin> terminy = this.przychodnia.getGrafik().getTerminy();
+        int licznik = 0;
         for (Termin termin : terminy) {
-            System.out.println(termin);
+//            if (licznik < 10) {
+                System.out.println(termin);
+//            }
+            licznik++;
         }
     }
 
     public void przegladajSpisLekarzy() {
         System.out.println();
         System.out.println("SPIS LEKARZY");
-        for (Map.Entry<String, Lekarz> lekarz : this.przychodnia.getSpisLekarzy().entrySet()) {
-            System.out.println(lekarz.getValue());
+        for (Lekarz lekarz : this.przychodnia.getSpisLekarzy().values()) {
+            System.out.println(lekarz);
         }
     }
 
     public void przegladajSpisPacjentow() {
         System.out.println();
         System.out.println("SPIS PACJENTÓW");
-        for (Map.Entry<String, Pacjent> pacjent : this.spisPacjentow.entrySet()) {
-            System.out.println(pacjent.getValue());
+        for (Pacjent pacjent : this.spisPacjentow.values()) {
+            System.out.println(pacjent);
         }
+    }
+
+    public Grafik wypelnijGrafikTerminami(long dlugoscTerminuMinuty, long liczbaDni) {
+        Grafik grafik = new Grafik();
+
+        long iloscMinutWDniu = 1440;
+        long iloscTerminow = (iloscMinutWDniu / dlugoscTerminuMinuty) * liczbaDni;
+
+        LocalDateTime teraz = LocalDateTime.now().truncatedTo(ChronoUnit.HOURS);
+        while (iloscTerminow > 0) {
+            for (Lekarz lekarz : this.przychodnia.getSpisLekarzy().values()) {
+                teraz = teraz.plusMinutes(dlugoscTerminuMinuty);
+                grafik.getTerminy().add(new Termin(lekarz, teraz));
+                iloscTerminow--;
+            }
+        }
+
+        System.out.println("#### GRAFIK " +  grafik.getTerminy().size());
+        return grafik;
     }
 }

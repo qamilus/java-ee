@@ -5,7 +5,6 @@ import pl.swislowski.kamil.javaee.programowanieObiektowe.przychodnia.data.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class PrzychodniaPacjent {
 
@@ -24,6 +23,7 @@ public class PrzychodniaPacjent {
                 return termin;
             }
         }
+
         System.out.println("Wyszukiwany termin nie został odnaleziony. ");
         return null;
     }
@@ -47,8 +47,7 @@ public class PrzychodniaPacjent {
         System.out.print(" szukana specjalność: " + szukanaSpecjalnosc);
         List<Lekarz> wyszukaniLekarze = new ArrayList<>();
 
-        for (Map.Entry<String, Lekarz> mapEntry : this.przychodnia.getSpisLekarzy().entrySet()) {
-            Lekarz lekarz = mapEntry.getValue();
+        for (Lekarz lekarz : this.przychodnia.getSpisLekarzy().values()) {
             if (szukaneImie != null) {
                 if (szukaneImie.equalsIgnoreCase(lekarz.getImie())) {
                     wyszukaniLekarze.add(lekarz);
@@ -98,7 +97,7 @@ public class PrzychodniaPacjent {
             }
         }
 
-        System.out.printf("Dostępne terminy dla wybranej specjalności %s -> %s", szukanaSpecjalnosc, wyszukaneTerminy);
+        System.out.printf("Dostępne terminy dla wybranej specjalności %s -> %s%n", szukanaSpecjalnosc, wyszukaneTerminy);
         return wyszukaneTerminy;
     }
 

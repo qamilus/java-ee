@@ -16,6 +16,10 @@ public class Przychodnia {
         return grafik;
     }
 
+    public void setGrafik(Grafik grafik) {
+        this.grafik = grafik;
+    }
+
     public Map<String, Lekarz> getSpisLekarzy() {
         return spisLekarzy;
     }
