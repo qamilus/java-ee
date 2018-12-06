@@ -4,21 +4,29 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AddFakturaJDialog extends JDialog {
-    private JFrame parent;   // dlaczego to jest parent?
 
-    public AddFakturaJDialog(JFrame parent) {
+    private ListFakturaJPanel listFakturaJPanel;
+
+    public AddFakturaJDialog(JFrame parent, ListFakturaJPanel listFakturaJPanel) {
         super(parent);
+        this.listFakturaJPanel = listFakturaJPanel;
 
-        this.parent = parent;
         initializeComponents();
     }
 
     private void initializeComponents() {
         setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 
-        JPanel jPanel = new AddFakturaJPanel();
+        AddFakturaJPanel jPanel = new AddFakturaJPanel();
+        jPanel.setListFakturaJPanel(listFakturaJPanel);
 
         add(jPanel);
+        pack();
     }
 
+    public void setListFakturaJPanel(ListFakturaJPanel listFakturaJPanel) {
+        this.listFakturaJPanel = listFakturaJPanel;
+        System.out.println("####");
+        System.out.println(this.listFakturaJPanel);
+    }
 }

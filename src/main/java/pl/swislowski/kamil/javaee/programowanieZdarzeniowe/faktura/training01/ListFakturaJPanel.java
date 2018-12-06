@@ -6,13 +6,18 @@ import javax.swing.*;
 
 public class ListFakturaJPanel extends JPanel {
     private JFrame listFakturaJFrame;
+    private  DefaultListModel<FakturaVat> listModel;
 
     public ListFakturaJPanel() {
         initializeComponents();
     }
 
+    public void addFakturaOnList(FakturaVat fakturaVat) {
+        this.listModel.addElement(fakturaVat);
+    }
+
     private void initializeComponents() {
-        DefaultListModel<FakturaVat> listModel = new DefaultListModel<>();
+        listModel = new DefaultListModel<>();
         listModel.addElement(new FakturaVat("Klej", 5, true));
         listModel.addElement(new FakturaVat("Nożyczki", 15, false));
 
@@ -22,7 +27,7 @@ public class ListFakturaJPanel extends JPanel {
         JButton addButton = new JButton("Dodaj");
         addButton.addActionListener(e -> {
             System.out.println("Dodaję...");
-            JDialog jDialog = new AddFakturaJDialog(this.listFakturaJFrame);
+            AddFakturaJDialog jDialog = new AddFakturaJDialog(this.listFakturaJFrame, this);
             jDialog.setVisible(true);
         });
 
