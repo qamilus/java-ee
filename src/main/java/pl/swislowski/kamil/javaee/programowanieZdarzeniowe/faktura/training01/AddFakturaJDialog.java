@@ -19,6 +19,7 @@ public class AddFakturaJDialog extends JDialog {
 
         AddFakturaJPanel jPanel = new AddFakturaJPanel();
         jPanel.setListFakturaJPanel(listFakturaJPanel);
+        jPanel.setAddFakturaJDialog(this);
 
         add(jPanel);
         pack();

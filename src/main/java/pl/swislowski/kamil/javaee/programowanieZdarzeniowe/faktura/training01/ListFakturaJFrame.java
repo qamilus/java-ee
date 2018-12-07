@@ -12,7 +12,7 @@ public class ListFakturaJFrame extends JFrame {
 
 //        AddFakturaJPanel jPanel = new AddFakturaJPanel();
         ListFakturaJPanel jPanel = new ListFakturaJPanel();
-        jPanel.setListFakturaJFrame(this);  // nie rozumiem konstrukcji
+        jPanel.setListFakturaJFrame(this);
 
         add(jPanel);
         pack();
