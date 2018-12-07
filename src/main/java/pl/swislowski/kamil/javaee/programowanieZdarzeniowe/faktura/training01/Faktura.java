@@ -13,8 +13,8 @@ public class Faktura {
 	private Kontrahent klient;
 	// kiedy zosta�a wystawiona
 	private LocalDate dataWystawienia;
-	
-// ----------------------------------------------- IDENTYFIKATOR FAKTURY	
+
+// ----------------------------------------------- IDENTYFIKATOR FAKTURY
 	// identyfikator, numer faktury
 	private String nr;
 	// klasa do sporz�dzania identyfikatora: jest statyczna, bo nie potrzebuje obiketu Faktury by dzia�a�
@@ -23,12 +23,12 @@ public class Faktura {
 		static int aktualnyNumer = 0;
 		static int aktualnyMiesiac = 0;
 		static int aktualnyRok = 0;
-		
+
 		// i metod� do generowania numeru
 		// kt�ra dzia�a niezale�nie od liczby ju� wystawionych faktur
 		static String generateNr(){
 			LocalDate ld = LocalDate.now();
-			
+
 			// aktualizacja roku
 			int year = ld.getYear();
 			int month = ld.getMonthValue();
@@ -44,12 +44,12 @@ public class Faktura {
 			}
 			// zwracamy tekst sk�adaj�cy si� z numeru dokumentu w danym miesi�cu, miesi�ca i roku
 			return (++aktualnyNumer)+"/"+aktualnyMiesiac+"/"+aktualnyRok;
-			
+
 		}
 	}
-	
-	
-// ----------------------------------------------- POZYCJE FAKTURY	
+
+
+// ----------------------------------------------- POZYCJE FAKTURY
 	// typy wyliczeniowe potrzebne przy obs�udze pozycji fakturowej
 	public enum Miara{SZT,M,L,KG,M2} // typ okre�laj�cy rodzaje jednostki
 	public enum VAT{ // typ okre�lj�cy warto�ci podatku
@@ -64,14 +64,14 @@ public class Faktura {
 		}
 	}
 	// prywatna klasa wewn�trzna opisuj�ca pojedyncz� pozycj� na fakturze
-	private class Pozycja{
+	public class Pozycja{
 		private int pozycja;
 		private String nazwa;
 		private Miara miara;
 		private double ilosc;
 		private double cenaJednostkowaNetto;
 		private VAT podatek;
-		
+
 		public Pozycja(String nazwa, Miara miara, double ilosc, double cena, VAT podatek) {
 			this.nazwa = nazwa;
 			this.miara = miara;
@@ -93,7 +93,7 @@ public class Faktura {
 		}
 	}
 	// metoda naglowek() nie mo�e by� (jako statyczna) w klasie Pozycja poniewa� klasa Pozycja nie jest statyczna
-	// mo�na by t� metod� wstawi� do klasy Pozycja, ale jako niestatyczn� 
+	// mo�na by t� metod� wstawi� do klasy Pozycja, ale jako niestatyczn�
 	// - niestety wtedy nie b�dziemy w stanie wydrukowa� nag��wka pustej faktury(w trakcie tworzenia)
 	// poniewa� nie b�dzie �adnego obiektu typu Pozycja kt�ry by t� metod� wywo�a�.
 	public static String naglowek(){
@@ -104,7 +104,7 @@ public class Faktura {
 	// metoda dodaj�ca kolejn� pozycj� do faktury
 	public void addPozycja(String nazwa,Miara m, double ilosc, double cena, VAT podatek ){
 		if(zamknieta) return; // wyjd� je�li faktury nie mo�na edytowa�
-		
+
 		Pozycja p = new Pozycja(nazwa, m, ilosc, cena, podatek);
 		pozycje.add(p);
 		// oblicznie podatku od tej pozycji i dodanie go do podsumy
@@ -116,9 +116,9 @@ public class Faktura {
 		// dodanie do sumy brutto
 		sumaDoZaplaty += p.getWartosc()+ p.getPodatek();
 	}
-	
+
 // ----------------------------------------------- DODATKOWE W�ASNO�CI FAKTURY	
-	
+
 	// czy faktur� mo�na jeszcze edytowa�
 	private boolean zamknieta = false;
 	//metoda zamykaj�ca faktur�, co zabrania j� edytowa�
@@ -129,29 +129,48 @@ public class Faktura {
 	private HashMap<VAT, Double> podsumy = new HashMap<>();
 	private double sumaNetto = 0;
 	private double sumaDoZaplaty = 0;
-	
+
 // ----------------------------------------------- KONSTUKTOR	
-	
+
 	public Faktura(Kontrahent k){
 		nr = Identyfikator.generateNr();
 		klient = k;
 		dataWystawienia = LocalDate.now();
-		
+
 		//inicjowanie podsum stawkami VAT
 		for(VAT v: VAT.values()){
 			podsumy.put(v, 0.);
 		}
 	}
-	
-// ----------------------------------------------- WYPASANIE	
-	
+
+	public Kontrahent getKlient() {
+		return klient;
+	}
+
+	public LocalDate getDataWystawienia() {
+		return dataWystawienia;
+	}
+
+	public String getNr() {
+		return nr;
+	}
+
+	public ArrayList<Pozycja> getPozycje() {
+		return pozycje;
+	}
+
+	public boolean isZamknieta() {
+		return zamknieta;
+	}
+	// ----------------------------------------------- WYPASANIE
+
 	@Override
 	public String toString(){
 		String faktura = "---------------------------------------------\n";
 		faktura += (zamknieta?"Z-":"O-")+"Faktura nr."+ nr +"\n";
 		faktura += "z dnia " + dataWystawienia.format(DateTimeFormatter.ofPattern("d-M-y")) + "\n";
 		faktura += "\nDLA: \n"+klient +"\n\n";
-		faktura += naglowek() +"\n"; 
+		faktura += naglowek() +"\n";
 		for(Pozycja p:pozycje){
 			faktura += p.toString()+"\n";
 		}

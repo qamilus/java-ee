@@ -1,28 +1,34 @@
 package pl.swislowski.kamil.javaee.programowanieZdarzeniowe.faktura.training01;
 
-import pl.swislowski.kamil.javaee.programowanieZdarzeniowe.faktura.zaliczenie.FakturaVat;
-
 import javax.swing.*;
+import java.awt.*;
 
 public class ListFakturaJPanel extends JPanel {
     private JFrame listFakturaJFrame;
-    private  DefaultListModel<FakturaVat> listModel;
+    private  DefaultListModel<Faktura> fakturyListModel;
 
     public ListFakturaJPanel() {
         initializeComponents();
     }
 
-    public void addFakturaOnList(FakturaVat fakturaVat) {
-        this.listModel.addElement(fakturaVat);
+    public void addFakturaOnList(Faktura faktura) {
+        this.fakturyListModel.addElement(faktura);
+    }
+
+    public void setListFakturaJFrame(JFrame listFakturaJFrame) {
+        this.listFakturaJFrame = listFakturaJFrame;
     }
 
     private void initializeComponents() {
-        listModel = new DefaultListModel<>();
-        listModel.addElement(new FakturaVat("Klej", 5, true));
-        listModel.addElement(new FakturaVat("Nożyczki", 15, false));
+        setLayout(new BorderLayout());
+        JPanel centerJPanel = new JPanel();
+        JPanel pageEndJPanel = new JPanel();
 
-        JList<FakturaVat> jList = new JList<>(listModel);
+        fakturyListModel = new DefaultListModel<>();
+
+        JList<Faktura> jList = new JList<>(fakturyListModel);
         JScrollPane jScrollPane = new JScrollPane(jList);
+        jScrollPane.setPreferredSize(new Dimension(900, 100));
 
         JButton addButton = new JButton("Dodaj");
         addButton.addActionListener(e -> {
@@ -45,9 +51,9 @@ public class ListFakturaJPanel extends JPanel {
         removeJButton.addActionListener(e -> {
             int index = jList.getSelectedIndex();
 
-            if (index != -1) listModel.remove(index);
+            if (index != -1) fakturyListModel.remove(index);
 
-            int size = listModel.getSize();
+            int size = fakturyListModel.getSize();
 
             if (size == 0) { // no item on the list
                 removeJButton.setEnabled(false);
@@ -70,31 +76,28 @@ public class ListFakturaJPanel extends JPanel {
             if (dialogResult == 0) {
                 System.out.println("Yes option");
                 int index = jList.getSelectedIndex();
-                FakturaVat fakturaVat = jList.getSelectedValue();
-                boolean closed = fakturaVat.isClosed();
+                Faktura faktura = jList.getSelectedValue();
+                boolean closed = faktura.isZamknieta();
                 if (!closed) {
-                    fakturaVat.setClosed(true);
+                    faktura.zamknij();
                 } else {
                     JOptionPane.showMessageDialog(this, "Faktura jest już zamknięta");
                 }
-//                jList.setSelectedIndex(index);
-//                jList.ensureIndexIsVisible(index);
-                jList.updateUI();   //pozwala na odświeżenie wartości listy po zmianie fakturyVat
+                jList.updateUI();   //pozwala na odświeżenie wartości listy po zmianie faktury
             } else {
                 System.out.println("No Option");
             }
             System.out.println("Zamykam fakturę...");
         });
 
-        add(jScrollPane);
-        add(addButton);
-        add(editJButton);
-        add(detailsJButton);
-        add(removeJButton);
-        add(closeJButton);
-    }
+        centerJPanel.add(jScrollPane);
+        add(centerJPanel, BorderLayout.CENTER);
 
-    public void setListFakturaJFrame(JFrame listFakturaJFrame) {
-        this.listFakturaJFrame = listFakturaJFrame;
+        pageEndJPanel.add(addButton);
+        pageEndJPanel.add(editJButton);
+        pageEndJPanel.add(detailsJButton);
+        pageEndJPanel.add(removeJButton);
+        pageEndJPanel.add(closeJButton);
+        add(pageEndJPanel, BorderLayout.PAGE_END);
     }
 }

@@ -16,15 +16,9 @@ public class AddPozycjaFakturaJDialog extends JDialog {
     private void initializeComponents() {
         setModalityType(ModalityType.APPLICATION_MODAL);
 
-        AddPozycjaFakturaJPanel jPanel = new AddPozycjaFakturaJPanel();
+        AddPozycjaFakturaJPanel jPanel = new AddPozycjaFakturaJPanel(this.addFakturaJPanel, this);
 
         add(jPanel);
         pack();
-    }
-
-    public void setAddFakturaJPanel(ListFakturaJPanel addFakturaJPanel) {
-//        this.addFakturaJPanel = addFakturaJPanel;
-        System.out.println("####");
-        System.out.println(this.addFakturaJPanel);
     }
 }

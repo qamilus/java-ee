@@ -24,10 +24,4 @@ public class AddFakturaJDialog extends JDialog {
         add(jPanel);
         pack();
     }
-
-    public void setListFakturaJPanel(ListFakturaJPanel listFakturaJPanel) {
-        this.listFakturaJPanel = listFakturaJPanel;
-        System.out.println("####");
-        System.out.println(this.listFakturaJPanel);
-    }
 }
