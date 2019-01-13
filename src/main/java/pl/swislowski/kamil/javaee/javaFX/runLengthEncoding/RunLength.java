@@ -43,7 +43,9 @@ public class RunLength {
             i++;
         }
 
-        encoded += chars[chars.length - 1] + "" + count;
+        encoded += chars[chars.length - 1] + "" + count;   // obsługa ostatniego ciągu znaków zawierającego powtarzające
+        // się znaki bez konieczności stosowania kolejnego warunku w algorytmie. Warunek w while nie pozwala nam na
+        // sprawdzenie ostatniego znaku.
 
         return encoded;
     }
