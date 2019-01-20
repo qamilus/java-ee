@@ -10,10 +10,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pl.swislowski.kamil.javaee.javaFX.pracaDomowaNr3.model.Person;
+import pl.swislowski.kamil.javaee.javaFX.pracaDomowaNr3.model.WorkTimeComparator;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class MainWindowController {
@@ -65,6 +67,8 @@ public class MainWindowController {
 
     @FXML
     private void loadFile() {
+
+        tableView.getItems().clear();
 
         try {
             in = new Scanner(Paths.get("/users/kamil/fileIO/pracownicyInfile.txt"));
@@ -141,6 +145,8 @@ public class MainWindowController {
 
     @FXML
     public void report() {
+
+        Collections.sort(personList, new WorkTimeComparator());
 
         try {
             out = new PrintWriter("/users/kamil/fileIO/pracownicyInfileRaport.txt");
