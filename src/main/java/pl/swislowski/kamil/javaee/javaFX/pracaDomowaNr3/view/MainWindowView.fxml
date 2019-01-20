@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxWidth="600.0" prefHeight="600.0" prefWidth="600.0" styleClass="background" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.swislowski.kamil.javaee.javaFX.pracaDomowaNr3.controller.MainWindowController">
+   <children>
+      <VBox fx:id="buttonVbox" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="700.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadFile" stylesheets="@application.css" text="Wczytaj" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveFile" stylesheets="@application.css" text="Zapisz" />
+            <Button fx:id="addButton" mnemonicParsing="false" onAction="#addPerson" stylesheets="@application.css" text="Dodaj" />
+            <Button fx:id="reportButton" mnemonicParsing="false" onAction="#report" stylesheets="@application.css" text="Raport" />
+            <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeStage" stylesheets="@application.css" text="Zamknij" />
+         </children>
+      </VBox>
+      <TableView fx:id="tableView" layoutX="100.0" layoutY="5.0" maxWidth="200.0" minWidth="226.0" prefHeight="400.0" prefWidth="240.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="635.0" AnchorPane.topAnchor="5.0">
+        <columns>
+            <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="Imię" />
+          <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Nazwisko" />
+          <TableColumn fx:id="roomNumberColumn" prefWidth="75.0" text="Pokój" />
+        </columns>
+      </TableView>
+      <VBox fx:id="labelsTextFieldsVBox" layoutX="340.0" layoutY="10.0" prefHeight="350.0" prefWidth="450.0" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <HBox prefHeight="30.0" prefWidth="200.0" spacing="170.0">
+               <children>
+                  <Label fx:id="nameLabel" text="Imię" />
+                  <Label fx:id="workStartHourLabel" text="Godz. rozp. pracy" />
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="firstNameTextField" />
+                  <TextField fx:id="workStartHourTextField" />
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="200.0" spacing="135.0">
+               <children>
+                  <Label fx:id="lastNameLabel" text="Nazwisko" />
+                  <Label fx:id="workEndHourLabel" text="Godz. zak. pracy" />
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="lastNameTextField" />
+                  <TextField fx:id="workEndHourTextField" />
+               </children>
+            </HBox>
+            <Label fx:id="roomNumberLabel" text="Nr pokoju" />
+            <TextField fx:id="roomNumberTextField" maxWidth="187.0" minWidth="187.0" prefWidth="187.0" />
+         </children></VBox>
+   </children>
+</AnchorPane>
