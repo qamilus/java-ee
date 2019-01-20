@@ -16,8 +16,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         mainWindow();
-
-
     }
 
     private void mainWindow() throws IOException {
@@ -26,7 +24,7 @@ public class Main extends Application {
 
         AnchorPane pane = loader.load();
         primaryStage.setMinWidth(800);
-        primaryStage.setMinHeight(600);
+        primaryStage.setMinHeight(500);
 
         Scene scene = new Scene(pane);
 
@@ -37,9 +35,7 @@ public class Main extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
-
 
     public static void main(String[] args) {
         launch(args);

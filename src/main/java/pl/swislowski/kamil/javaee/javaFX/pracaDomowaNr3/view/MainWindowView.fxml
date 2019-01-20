@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxWidth="600.0" prefHeight="600.0" prefWidth="600.0" styleClass="background" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.swislowski.kamil.javaee.javaFX.pracaDomowaNr3.controller.MainWindowController">
+<AnchorPane maxWidth="600.0" minHeight="500.0" prefHeight="500.0" prefWidth="500.0" styleClass="background" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.swislowski.kamil.javaee.javaFX.pracaDomowaNr3.controller.MainWindowController">
    <children>
       <VBox fx:id="buttonVbox" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="700.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -31,8 +31,8 @@
          <children>
             <HBox prefHeight="30.0" prefWidth="200.0" spacing="170.0">
                <children>
-                  <Label fx:id="nameLabel" text="Imię" />
-                  <Label fx:id="workStartHourLabel" text="Godz. rozp. pracy" />
+                  <Label fx:id="nameLabel" stylesheets="@application.css" text="Imię" />
+                  <Label fx:id="workStartHourLabel" stylesheets="@application.css" text="Godz. rozp. pracy" />
                </children>
             </HBox>
             <HBox prefHeight="30.0" prefWidth="200.0" spacing="10.0">
@@ -43,8 +43,8 @@
             </HBox>
             <HBox prefHeight="30.0" prefWidth="200.0" spacing="135.0">
                <children>
-                  <Label fx:id="lastNameLabel" text="Nazwisko" />
-                  <Label fx:id="workEndHourLabel" text="Godz. zak. pracy" />
+                  <Label fx:id="lastNameLabel" stylesheets="@application.css" text="Nazwisko" />
+                  <Label fx:id="workEndHourLabel" stylesheets="@application.css" text="Godz. zak. pracy" />
                </children>
             </HBox>
             <HBox prefHeight="30.0" prefWidth="200.0" spacing="10.0">
@@ -53,7 +53,11 @@
                   <TextField fx:id="workEndHourTextField" />
                </children>
             </HBox>
-            <Label fx:id="roomNumberLabel" text="Nr pokoju" />
+            <HBox prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="roomNumberLabel" stylesheets="@application.css" text="Nr pokoju" />
+               </children>
+            </HBox>
             <TextField fx:id="roomNumberTextField" maxWidth="187.0" minWidth="187.0" prefWidth="187.0" />
          </children></VBox>
    </children>

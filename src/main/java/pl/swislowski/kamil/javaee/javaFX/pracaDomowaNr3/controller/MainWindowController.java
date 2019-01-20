@@ -20,8 +20,8 @@ import java.util.Scanner;
 
 public class MainWindowController {
 
-    Scanner in = null;
-    PrintWriter out = null;
+    private Scanner in = null;
+    private PrintWriter out = null;
 
     private Person person = new Person();
 
@@ -82,12 +82,6 @@ public class MainWindowController {
 
                 personList.add(new Person(person.getFirstName(), person.getLastName(), person.getRoomNumber(),
                         person.getWorkStartHour(), person.getWorkEndHour()));
-
-//                System.out.printf("Wczytano dane -> imię: %-12s, nazwisko: %-12s, numer pokoju:%03d, " +
-//                                "godzina rozpoczęcia pracy:%03d, godzina zakończenia pracy:%03d\n", person.getFirstName(),
-//                        person.getLastName(), person.getRoomNumber(), person.getWorkStartHour(), person.getWorkEndHour());
-
-
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -101,8 +95,6 @@ public class MainWindowController {
                 new PropertyValueFactory<Person, String>("lastName"));
         roomNumberColumn.setCellValueFactory(
                 new PropertyValueFactory<Person, String>("roomNumber"));
-
-
     }
 
     @FXML
@@ -117,7 +109,6 @@ public class MainWindowController {
                         personList.get(i).getRoomNumber(),
                         personList.get(i).getWorkStartHour(),
                         personList.get(i).getWorkEndHour()
-
                 );
             }
         } catch (IOException e) {
@@ -202,6 +193,5 @@ public class MainWindowController {
     public void closeStage() {
         primaryStage.close();
     }
-
 
 }
