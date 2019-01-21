@@ -29,7 +29,6 @@ public class Main extends Application {
         Scene scene = new Scene(pane);
 
         MainWindowController mainWindowController = loader.getController();
-        System.out.println(mainWindowController);
         mainWindowController.setMain(this);
         mainWindowController.setPrimaryStage(primaryStage);
 

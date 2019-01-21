@@ -71,6 +71,7 @@ public class MainWindowController {
         tableView.getItems().clear();
 
         try {
+
             in = new Scanner(Paths.get("/users/kamil/fileIO/pracownicyInfile.txt"));
 
             while (in.hasNext()) {
@@ -174,10 +175,6 @@ public class MainWindowController {
                         roomNumberTextField.setText(newVal.getRoomNumber());
 
                     }
-                    System.out.println(
-                            newVal.getFirstName() + " " +
-                                    newVal.getLastName()
-                    );
                 }
         );
     }
