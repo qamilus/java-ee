@@ -3,7 +3,6 @@ package pl.swislowski.kamil.javaee.javaFX.pracaDomowaNr3.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -20,23 +19,16 @@ import java.util.Scanner;
 
 public class MainWindowController {
 
-    private Person person = new Person();
+    private static final String FILE_PATH = "/users/kamil/fileIO/";
+    private static final String PRACOWNICY_INFILE_TXT = "pracownicyInfile.txt";
+    private static final String PRACOWNICY_INFILE_RAPORT_TXT = "pracownicyInfileRaport.txt";
+
 
     private Main main;
     private Stage primaryStage;
 
     private ObservableList<Person> personList = FXCollections.observableArrayList();
 
-    @FXML
-    private Button loadButton;
-    @FXML
-    private Button saveButton;
-    @FXML
-    private Button addButton;
-    @FXML
-    private Button reportButton;
-    @FXML
-    private Button closeButton;
     @FXML
     private TableView<Person> tableView;
     @FXML
@@ -67,17 +59,22 @@ public class MainWindowController {
 
         tableView.getItems().clear();
 
-        try (Scanner in = new Scanner(Paths.get("/users/kamil/fileIO/pracownicyInfile.txt"))) {
+        Person person;
+
+        try (Scanner in = new Scanner(Paths.get(FILE_PATH + PRACOWNICY_INFILE_TXT))) {
 
             while (in.hasNext()) {
+
+                person = new Person();
+
                 person.setFirstName(in.next());
                 person.setLastName(in.next());
                 person.setRoomNumber(in.next());
                 person.setWorkStartHour(in.next());
                 person.setWorkEndHour(in.next());
 
-                personList.add(new Person(person.getFirstName(), person.getLastName(), person.getRoomNumber(),
-                        person.getWorkStartHour(), person.getWorkEndHour()));
+                personList.add(person);
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -93,7 +90,7 @@ public class MainWindowController {
 
     @FXML
     public void saveFile() {
-        try (PrintWriter out = new PrintWriter("/users/kamil/fileIO/pracownicyInfile.txt")) {
+        try (PrintWriter out = new PrintWriter(FILE_PATH + PRACOWNICY_INFILE_TXT)) {
 
             for (int i = 0; i < personList.size(); i++) {
                 out.printf("%s %s %s %s %s %n",
@@ -128,9 +125,13 @@ public class MainWindowController {
     @FXML
     public void report() {
 
+        //TODO: Wyszarzyć przycisk gdy tableview jest pusty(personList != null && size == 0)
+
+        //TODO: Dodać dialog z wyświetlaniem raportu.
+
         Collections.sort(personList, new WorkTimeComparator());
 
-        try (PrintWriter out = new PrintWriter("/users/kamil/fileIO/pracownicyInfileRaport.txt")) {
+        try (PrintWriter out = new PrintWriter(FILE_PATH + PRACOWNICY_INFILE_RAPORT_TXT)) {
 
             for (int i = 0; i < personList.size(); i++) {
                 out.printf("%s %s %s %s %s %n",
