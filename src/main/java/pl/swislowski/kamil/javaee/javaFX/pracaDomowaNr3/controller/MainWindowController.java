@@ -20,9 +20,6 @@ import java.util.Scanner;
 
 public class MainWindowController {
 
-    private Scanner in = null;
-    private PrintWriter out = null;
-
     private Person person = new Person();
 
     private Main main;
@@ -61,7 +58,7 @@ public class MainWindowController {
 
     public void setMain(Main main) {
         this.main = main;
-        setTable();
+//        setTable();
         tableView.setItems(personList);
     }
 
@@ -70,9 +67,7 @@ public class MainWindowController {
 
         tableView.getItems().clear();
 
-        try {
-
-            in = new Scanner(Paths.get("/users/kamil/fileIO/pracownicyInfile.txt"));
+        try (Scanner in = new Scanner(Paths.get("/users/kamil/fileIO/pracownicyInfile.txt"))) {
 
             while (in.hasNext()) {
                 person.setFirstName(in.next());
@@ -86,8 +81,6 @@ public class MainWindowController {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (in != null) in.close();
         }
 
         firstNameColumn.setCellValueFactory(
@@ -100,11 +93,10 @@ public class MainWindowController {
 
     @FXML
     public void saveFile() {
-        try {
-            out = new PrintWriter("/users/kamil/fileIO/pracownicyInfile.txt");
+        try (PrintWriter out = new PrintWriter("/users/kamil/fileIO/pracownicyInfile.txt")) {
 
             for (int i = 0; i < personList.size(); i++) {
-                out.printf("%s %s %s %s %s" + "%n",
+                out.printf("%s %s %s %s %s %n",
                         personList.get(i).getFirstName(),
                         personList.get(i).getLastName(),
                         personList.get(i).getRoomNumber(),
@@ -114,8 +106,6 @@ public class MainWindowController {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (out != null) out.close();
         }
 
         System.out.println("Zapisuję plik...");
@@ -140,12 +130,10 @@ public class MainWindowController {
 
         Collections.sort(personList, new WorkTimeComparator());
 
-        try {
-            out = new PrintWriter("/users/kamil/fileIO/pracownicyInfileRaport.txt");
-
+        try (PrintWriter out = new PrintWriter("/users/kamil/fileIO/pracownicyInfileRaport.txt")) {
 
             for (int i = 0; i < personList.size(); i++) {
-                out.printf("%s %s %s %s %s" + "%n",
+                out.printf("%s %s %s %s %s %n",
                         personList.get(i).getFirstName(),
                         personList.get(i).getLastName(),
                         personList.get(i).getRoomNumber(),
@@ -156,8 +144,6 @@ public class MainWindowController {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (out != null) out.close();
         }
 
         System.out.println("Sporządzam raport i zapisuję plik...");
@@ -177,9 +163,6 @@ public class MainWindowController {
                     }
                 }
         );
-    }
-
-    private void setTable() {
     }
 
     public void setPrimaryStage(Stage primaryStage) {
