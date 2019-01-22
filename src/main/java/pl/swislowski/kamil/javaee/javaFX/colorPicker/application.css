@@ -1,0 +1,13 @@
+.root {
+    -fx-background-color: beige;
+}
+
+.button {}
+
+.image-view-wrapper {}
+
+.border-black-solid, .image-view-wrapper, .button {
+    -fx-border-color: black;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+}
