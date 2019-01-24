@@ -2,7 +2,11 @@ package pl.swislowski.kamil.javaee.javaFX.colorPicker;
 
 import javafx.scene.image.ImageView;
 
-class ImageCropColors implements Comparable<ImageCropColors> {
+
+/**
+ * Klasa pomocnicza przechowująca informacje o wyciętych obszarach obrazka.
+ */
+public class ImageCropColors {
 
     private int id;
     private ImageView imageView;
@@ -15,6 +19,10 @@ class ImageCropColors implements Comparable<ImageCropColors> {
         this.id = id;
         this.imageView = imageView;
         this.redColor = redColor;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public ImageView getImageView() {
@@ -35,12 +43,6 @@ class ImageCropColors implements Comparable<ImageCropColors> {
 
     public void setRedColor(double redColor) {
         this.redColor = redColor;
-    }
-
-    @Override
-    public int compareTo(ImageCropColors o) {
-        if (this.redColor == o.getRedColor()) return 0;
-        return (this.redColor > o.getRedColor()) ? -1 : 1;
     }
 
     @Override
