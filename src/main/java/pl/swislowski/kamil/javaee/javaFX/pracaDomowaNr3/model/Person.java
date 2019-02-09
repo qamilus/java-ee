@@ -11,14 +11,6 @@ public class Person {
     public Person() {
     }
 
-    public Person(String firstName, String lastName, String roomNumber, String workStartHour, String workEndHour) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.roomNumber = roomNumber;
-        this.workStartHour = workStartHour;
-        this.workEndHour = workEndHour;
-    }
-
     public String getFirstName() {
         return firstName;
     }

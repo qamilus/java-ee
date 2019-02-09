@@ -3,6 +3,7 @@ package pl.swislowski.kamil.javaee.javaFX.pracaDomowaNr3.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,6 +31,12 @@ public class MainWindowController {
     private ObservableList<Person> personList = FXCollections.observableArrayList();
 
     @FXML
+    private Button reportButton;
+    @FXML
+    private Button saveButton;
+    @FXML
+    private Button addButton;
+    @FXML
     private TableView<Person> tableView;
     @FXML
     private TableColumn firstNameColumn;
@@ -50,12 +57,13 @@ public class MainWindowController {
 
     public void setMain(Main main) {
         this.main = main;
-//        setTable();
         tableView.setItems(personList);
     }
 
     @FXML
     private void loadFile() {
+
+        System.out.println("Wczytuję plik...");
 
         tableView.getItems().clear();
 
@@ -86,6 +94,10 @@ public class MainWindowController {
                 new PropertyValueFactory<Person, String>("lastName"));
         roomNumberColumn.setCellValueFactory(
                 new PropertyValueFactory<Person, String>("roomNumber"));
+
+        saveButton.setDisable(false);
+        addButton.setDisable(false);
+        reportButton.setDisable(false);
     }
 
     @FXML
@@ -120,14 +132,12 @@ public class MainWindowController {
         person.setWorkEndHour(workEndHourTextField.getText());
 
         personList.add(person);
+
+        System.out.println("Dodano do listy nową osobę.");
     }
 
     @FXML
     public void report() {
-
-        //TODO: Wyszarzyć przycisk gdy tableview jest pusty(personList != null && size == 0)
-
-        //TODO: Dodać dialog z wyświetlaniem raportu.
 
         Collections.sort(personList, new WorkTimeComparator());
 
@@ -164,6 +174,10 @@ public class MainWindowController {
                     }
                 }
         );
+
+        saveButton.setDisable(true);
+        addButton.setDisable(true);
+        reportButton.setDisable(true);
     }
 
     public void setPrimaryStage(Stage primaryStage) {

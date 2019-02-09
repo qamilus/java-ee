@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class RunLengthView extends Application {
 
-    private static final String REGEX_INPUT = "(\\w\\d|\\w\\d,)+";
+    private static final String REGEX_INPUT = "(\\w\\d+|\\w\\d+,)+";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -65,19 +65,22 @@ public class RunLengthView extends Application {
 
         Button wykonajButton = new Button("Wykonaj");
         wykonajButton.setOnAction(event -> {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Brak danych w źródle!", ButtonType.OK);
 
             actionTarget.setFill(Color.DARKSLATEGRAY);
             actionTarget.setText("Operacja została wykonana");
 
             String text = zrodloTextField.getText();
+
             if (text != null && text.length() > 0) {
 
                 boolean correctInput = text.matches(REGEX_INPUT);
 
                 boolean selectedKodowanie = kodowanieRadioButton.isSelected();
+                // Jeżeli wybrano kodowanie, to correctInput musi zwrócić false, czyli badany tekst nie zawiera par rozdzielonych przecinkami.
                 if (selectedKodowanie) {
+
                     if (!correctInput) {
+                        //Wywołanie metody algorytmu.
                         String encode = RunLength.encode(text);
                         wynikTextField.setText(encode);
 
@@ -88,9 +91,11 @@ public class RunLengthView extends Application {
                 }
 
                 boolean selectedDekodowanie = dekodowanieRadioButton.isSelected();
+                // Jeżeli wybrano dekodowanie, to correctInput musi zwrócić true, czyli badany tekst zawiera pary rozdzielone przecinkami.
                 if (selectedDekodowanie) {
 
                     if (correctInput) {
+                        //Wywołanie metody algorytmu.
                         String decode = RunLength.decode(text);
                         wynikTextField.setText(decode);
 
@@ -101,6 +106,7 @@ public class RunLengthView extends Application {
                 }
 
             } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Brak danych w źródle!", ButtonType.OK);
                 alert.show();
             }
         });
