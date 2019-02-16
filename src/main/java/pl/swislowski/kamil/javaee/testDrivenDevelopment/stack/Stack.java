@@ -35,9 +35,14 @@ public class Stack {
 
     public int getSize() {
 
-
         return MAX_CAPACITY;
     }
-// TODO : Praca domowa - nie zmieniać formy stosu z tablicy. Konfigurowalność rozmiaru stosu. Jeżeli się zwiększu, to luz, jeżeli się zmienjszy
+
+    public boolean clear() {
+
+        return isEmpty();
+    }
+
+    // TODO : Praca domowa - nie zmieniać formy stosu z tablicy. Konfigurowalność rozmiaru stosu. Jeżeli się zwiększu, to luz, jeżeli się zmienjszy
     //TODO : trzeba rzucić wyjątkiem.
 }

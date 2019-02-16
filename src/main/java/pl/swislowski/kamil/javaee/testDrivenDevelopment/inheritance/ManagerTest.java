@@ -1,9 +1,9 @@
 package pl.swislowski.kamil.javaee.testDrivenDevelopment.inheritance;
 
+import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
-import org.junit.Test;
 
 /**
  * This program demonstrates inheritance.
