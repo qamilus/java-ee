@@ -1,4 +1,4 @@
-package pl.swislowski.kamil.javaee.przejsciowy.controller;
+package pl.swislowski.kamil.javaee.projekt.przejsciowy.controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

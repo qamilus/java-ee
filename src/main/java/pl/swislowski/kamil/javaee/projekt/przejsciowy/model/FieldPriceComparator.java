@@ -1,4 +1,4 @@
-package pl.swislowski.kamil.javaee.przejsciowy.model;
+package pl.swislowski.kamil.javaee.projekt.przejsciowy.model;
 
 import java.util.Comparator;
 

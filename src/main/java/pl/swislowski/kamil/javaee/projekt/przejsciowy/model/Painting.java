@@ -1,4 +1,4 @@
-package pl.swislowski.kamil.javaee.przejsciowy.model;
+package pl.swislowski.kamil.javaee.projekt.przejsciowy.model;
 
 public class Painting {
     private static final double PI = 3.14;
@@ -7,8 +7,8 @@ public class Painting {
     private String height;
     private String width;
     private String radius;
-    private String nonCircleField;// = height * width;
-    private String circleField; //= PI * radius * radius;
+    private String nonCircleField;
+    private String circleField;
     private String weight;
     private String price;
     private String category;

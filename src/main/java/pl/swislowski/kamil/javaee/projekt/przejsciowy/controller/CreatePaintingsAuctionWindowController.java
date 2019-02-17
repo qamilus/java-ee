@@ -1,4 +1,4 @@
-package pl.swislowski.kamil.javaee.przejsciowy.controller;
+package pl.swislowski.kamil.javaee.projekt.przejsciowy.controller;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,9 +12,6 @@ public class CreatePaintingsAuctionWindowController {
     private Stage primaryStage;
 
     private ObservableList<Painting> przejsciowyBeans;
-
-////    @FXML
-//    private TableView<Painting> tableView;
 
     @FXML
     private TextField titleTextField;
@@ -81,13 +78,11 @@ public class CreatePaintingsAuctionWindowController {
             double circleField = Painting.getPI() * radiusD * radiusD;
             String text = String.valueOf(circleField);
             bean.setCircleField(text);
-//            nonCircleFieldTextField.setText("0");
             bean.setNonCircleField("0");
         } else {
             double nonCircleField = heightD * widthD;
             String text1 = String.valueOf(nonCircleField);
             bean.setNonCircleField(text1);
-//            circleFieldTextField.setText("0");
             bean.setCircleField("0");
         }
 

@@ -1,4 +1,4 @@
-package pl.swislowski.kamil.javaee.przejsciowy.controller;
+package pl.swislowski.kamil.javaee.projekt.przejsciowy.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,11 +63,8 @@ public class ListPaintingsAuctionWindowController {
     private ToggleButton sortPriceToggleButton;
     @FXML
     private ToggleButton sortAuthorToggleButton;
-//
-//    @FXML
-//    private Button addButton;
 
-    public void initialize() {          //automatycznie wywoywana po zainicjowaniu kontrolera
+    public void initialize() {
 
         titleColumn.setCellValueFactory(
                 new PropertyValueFactory<Painting, String>("title"));
@@ -94,10 +91,6 @@ public class ListPaintingsAuctionWindowController {
     }
 
     private void setTable() {
-//        paintings.add(new PrzejsciowyBean("22", "Tomasz", "Majewski", "black"));
-//        paintings.add(new PrzejsciowyBean("33", "Stefan", "Zakowski", "black"));
-//        paintings.add(new PrzejsciowyBean("44", "Piotr", "Gajewski", "black"));
-//        paintings.add(new PrzejsciowyBean("55", "Adrian", "Muchowski", "black"));
 
         tableView.setItems(paintings);
     }
@@ -110,7 +103,7 @@ public class ListPaintingsAuctionWindowController {
         FXMLLoader loader = new FXMLLoader(ListPaintingsAuctionWindowController.class.getResource("../view/CreatePaintingsAuctionWindowView.fxml"));
 
         try {
-            Stage stage = PaintingsAuctionUtilsWindowController.createStage(loader, primaryStage, "Dodaj Przejsciowy");
+            Stage stage = PaintingsAuctionUtilsWindowController.createStage(loader, primaryStage, "Dodaj nową pozycję");
 
             CreatePaintingsAuctionWindowController controller = loader.getController();
             controller.setPrimaryStage(stage);
@@ -137,7 +130,7 @@ public class ListPaintingsAuctionWindowController {
         FXMLLoader loader = new FXMLLoader(ListPaintingsAuctionWindowController.class.getResource("../view/UpdatePaintingsAuctionView.fxml"));
 
         try {
-            Stage stage = PaintingsAuctionUtilsWindowController.createStage(loader, primaryStage, "Edytuj Przejsciowy");
+            Stage stage = PaintingsAuctionUtilsWindowController.createStage(loader, primaryStage, "Edytuj pozycję z listy");
 
             UpdatePaintingsAuctionWindowController controller = loader.getController();
             controller.setPrimaryStage(stage);
@@ -205,8 +198,6 @@ public class ListPaintingsAuctionWindowController {
     }
 
     public void saveFileButtonAction(ActionEvent actionEvent) {
-//        Collections.sort(paintings, new FieldPriceComparator());
-//        Collections.sort(paintings, new FieldTitleComparator());
 
         try (PrintWriter out = new PrintWriter(FILE_PATH + FILE_OUTPUT_TXT)) {
 

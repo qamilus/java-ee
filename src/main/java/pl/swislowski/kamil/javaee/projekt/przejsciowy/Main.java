@@ -1,4 +1,4 @@
-package pl.swislowski.kamil.javaee.przejsciowy;
+package pl.swislowski.kamil.javaee.projekt.przejsciowy;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,7 @@ public class Main extends Application {
         InfoPaintingsAuctionWindowController controller = loader.getController();
         controller.setStage(primaryStage);
 
-        primaryStage.setTitle("Projekt przejściowy");
+        primaryStage.setTitle("Okno powitalne");
         primaryStage.setScene(new Scene(root, 800, 800));
         primaryStage.show();
     }
